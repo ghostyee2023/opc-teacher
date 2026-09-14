@@ -124,7 +124,7 @@ export default function ManageApp() {
     const nextId = Math.max(0, ...Object.keys(course.chapters).map(Number)) + 1;
     updateCourse(course.id, (item) => ({
       ...item,
-      chapters: { ...item.chapters, [nextId]: { title: "新章节", description: "", task: "", prompts: [""] } },
+      chapters: { ...item.chapters, [nextId]: { title: `第 ${nextId} 章`, description: "", task: "", prompts: [""] } },
     }));
     setChapterId(nextId);
     setPromptIndex(0);
@@ -299,14 +299,14 @@ export default function ManageApp() {
                   {chapterEntries.map(([id, item]) => (
                     <button key={id} className={Number(id) === chapterId ? "active" : ""} onClick={() => { setChapterId(Number(id)); setPromptIndex(0); }}>
                       <b>{id.padStart(2, "0")}</b>
-                      <span><strong>{item.title || "未命名章节"}</strong><small>{lessonPrompts(item).length} 个提示词</small></span>
+                      <span><strong>{item.title || `第 ${Number(id)} 章`}</strong><small>{lessonPrompts(item).length} 个提示词</small></span>
                     </button>
                   ))}
                   <button className="management-chapter-remove" onClick={removeChapter}><Trash size={14} />删除当前章节</button>
                 </nav>
                 <div className="management-content-panel-inner">
                   <div className="management-content-panel-heading">
-                    <div><span>第 {chapterId} 章 · {lesson?.title}</span><h2>章节内容</h2></div>
+                    <div><span>第 {chapterId} 章</span><h2>章节内容</h2></div>
                     <button className="management-save" onClick={saveContent}><Check size={16} />保存</button>
                   </div>
                   <div className="management-content-subtabs" role="tablist">
@@ -316,9 +316,8 @@ export default function ManageApp() {
                   </div>
                   {contentSubtab === "task" && (
                     <div className="management-task-panel">
-                      <label className="management-field"><span>章节标题</span><input value={lesson?.title ?? ""} onChange={(event) => updateCurrentLesson("title", event.target.value)} /></label>
-                      <label className="management-field"><span>场景说明</span><textarea value={lesson?.description ?? ""} onChange={(event) => updateCurrentLesson("description", event.target.value)} rows={6} /></label>
-                      <label className="management-field"><span>实操任务</span><textarea value={lesson?.task ?? ""} onChange={(event) => updateCurrentLesson("task", event.target.value)} rows={6} /></label>
+                      <label className="management-field"><span>场景说明</span><textarea value={lesson?.description ?? ""} onChange={(event) => updateCurrentLesson("description", event.target.value)} rows={7} /></label>
+                      <label className="management-field"><span>实操任务</span><textarea value={lesson?.task ?? ""} onChange={(event) => updateCurrentLesson("task", event.target.value)} rows={7} /></label>
                     </div>
                   )}
                   {contentSubtab === "prompts" && (
