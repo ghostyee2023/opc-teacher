@@ -1,0 +1,29 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+*.tsbuildinfo
+
+# local env files (supabase keys)
+.env
+.env.local
+.env.*.local
+
+# editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# local tool artifacts
+.impeccable/
+vite.config.js
+vite.config.d.ts
+
+# logs
+*.log
+npm-debug.log*
+
+# prototype screenshots (root-level working captures)
+*.png
